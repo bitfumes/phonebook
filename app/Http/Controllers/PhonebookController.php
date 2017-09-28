@@ -14,7 +14,7 @@ class PhonebookController extends Controller
      */
     public function index()
     {
-        //
+        return view('phonebook');
     }
 
     /**
@@ -35,7 +35,11 @@ class PhonebookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pb = new Phonebook;
+        $pb->name = $request->name;
+        $pb->phone = $request->phone;
+        $pb->email = $request->email;
+        $pb->save();
     }
 
     /**

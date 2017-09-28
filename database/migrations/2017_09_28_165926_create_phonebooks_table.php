@@ -15,6 +15,9 @@ class CreatePhonebooksTable extends Migration
     {
         Schema::create('phonebooks', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->integer('phone');
+            $table->string('email');
             $table->timestamps();
         });
     }
