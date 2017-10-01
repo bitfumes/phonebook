@@ -18,9 +18,9 @@
 	  </div>
 	 
 	 
-	  <a class="panel-block ">
+	  <a class="panel-block " v-for="item,key in lists">
 	  	<span class="column is-9">
-	    	marksheet
+	    	{{ item.name }}
 	  	</span>
 	    <span class="panel-icon column is-1">
 	      <i class="has-text-danger fa fa-trash" aria-hidden="true"></i>
@@ -43,8 +43,15 @@ let Add = require('./Add.vue');
 		components:{Add},
 		data(){
 			return{
-				addActive : ''
+				addActive : '',
+				lists:{},
+				errors:{}
 			}
+		},
+		mounted(){
+			axios.post('/getData')
+			.then((response)=> this.lists = response.data)
+			.catch((error) => this.errors = error.response.data.errors)
 		},
 		methods:{
 			openAdd(){
