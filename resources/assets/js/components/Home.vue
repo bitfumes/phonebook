@@ -28,22 +28,25 @@
 	    <span class="panel-icon column is-1">
 	      <i class="has-text-info fa fa-edit" aria-hidden="true"></i>
 	    </span><span class="panel-icon column is-1">
-	      <i class="has-text-primary fa fa-eye" aria-hidden="true"></i>
+	      <i class="has-text-primary fa fa-eye" aria-hidden="true" @click="openShow(key)"></i>
 	    </span>
 	  </a>
 	</nav>
 
 	<Add :openmodal='addActive' @closeRequest='close'></Add>
+	<Show :openmodal='showActive' @closeRequest='close'></Show>
 	</div>
 </template>
 
 <script>
 let Add = require('./Add.vue');
+let Show = require('./Show.vue');
 	export default{
-		components:{Add},
+		components:{Add,Show},
 		data(){
 			return{
 				addActive : '',
+				showActive : '',
 				lists:{},
 				errors:{}
 			}
@@ -57,8 +60,12 @@ let Add = require('./Add.vue');
 			openAdd(){
 				this.addActive = 'is-active';
 			},
+			openShow(key){
+				this.$children[1].list = this.lists[key]
+				this.showActive = 'is-active';
+			},
 			close(){
-				this.addActive = ''
+				this.addActive = this.showActive = ''
 			}
 		}
 	}
