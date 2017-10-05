@@ -58,7 +58,18 @@
 				this.$emit('closeRequest')
 			},
 			save(){
-				axios.post('/phonebook',this.$data.list).then((response)=> this.close())
+				axios.post('/phonebook',this.$data.list).then((response)=> {
+					this.close()
+					this.$parent.lists.push(response.data)
+					this.$parent.lists.sort(function(a,b){
+						if (a.name > b.name) {
+							return 1;
+						}else if(a.name < b.name){
+							return -1;
+						}
+					})
+					this.list = ""
+				})
 				  .catch((error) => this.errors = error.response.data.errors)
 			}
 		}
