@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class PhonebookRequest extends FormRequest
 {
@@ -21,12 +22,12 @@ class PhonebookRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
             'name' => 'required|max:255',
-            'phone'=> 'required|max:10|numeric',
-            'email'=> 'required|email|unique:phonebooks'
+            'phone'=> 'required|max:10',
+            'email'=> 'required|email|unique:phonebooks,email,'.$request->id
         ];
     }
 }
