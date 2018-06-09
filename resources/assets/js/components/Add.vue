@@ -68,7 +68,11 @@
 							return -1;
 						}
 					})
-					this.list = ""
+					this.list = {
+						name:'',
+						phone:'',
+						email:''
+					}
 				})
 				  .catch((error) => this.errors = error.response.data.errors)
 			}
